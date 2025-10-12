@@ -1,0 +1,39 @@
+================================================================================
+ARTIFICIAL GROUND MOTION REPORT (Project: 20250929_131729)
+================================================================================
+
+1. ACCELERATION TIME SERIES INFORMATION
+----------------------------------------
+Total Duration: 40.00 s
+Time Step: 0.01000 s
+Number of Data Points: 4001
+PGA: 0.3251 g
+
+2. TBDY 2018 SPECTRUM PARAMETERS
+----------------------------------------
+Ss: 1.3
+S1: 0.4
+Soil Class: ZB
+Fs: 0.9
+F1: 0.8
+SDS: 1.1700000000000002
+SD1: 0.32000000000000006
+TA: 0.05470085470085471
+TB: 0.27350427350427353
+
+3. GENERATED FILES
+----------------------------------------
+Directory: F:\GitHub\artificial-ground-motion\example_outputs
+
+- acceleration_time_history_20250929_131729.png
+- accelerogram_20250929_131729.txt
+- psd_log_20250929_131729.png
+- report_20250929_131729.txt
+- response_spectrum_20250929_131729.txt
+- spectrogram_20250929_131729.png
+- spectrum_comparison_linear_20250929_131729.png
+- spectrum_comparison_loglog_20250929_131729.png
+
+================================================================================
+Report Creation Date: 2025-09-29 13:17:30
+================================================================================
