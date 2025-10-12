@@ -35,7 +35,7 @@ def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvem
     """
     
     # Create output directory
-    output_dir = name+'_outputs2'
+    output_dir = name+'_outputs'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     

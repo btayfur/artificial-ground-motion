@@ -36,8 +36,8 @@ The toolkit consists of several modules:
 No special installation is required. Simply clone the repository and ensure you have the necessary dependencies installed:
 
 ```bash
-git clone https://github.com/your-username/artificial-ground-motion-generator.git
-cd artificial-ground-motion-generator
+git clone https://github.com/btayfur/artificial-ground-motion.git
+cd artificial-ground-motion
 pip install numpy scipy matplotlib
 ```
 
@@ -95,7 +95,7 @@ The toolkit generates various outputs such as:
 
 ## License
 
-This project was created for academic purposes. Contributions and pull requests are warmly welcomed.
+This project is created for academic purposes. Contributions and pull requests are warmly welcomed.
 
 ## How to cite
 
