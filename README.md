@@ -18,6 +18,7 @@ This repository provides a comprehensive toolkit for generating earthquake accel
 - Apply baseline correction and filtering
 - Comprehensive visualization of results
 - Output generation in various formats
+- **Controllable Reproducibility**: Support for random seed generation to ensure identical, deterministic results across runs.
 
 ## Components
 
@@ -29,45 +30,42 @@ The toolkit consists of several modules:
 - `spectral_analysis.py`: Performs response spectrum calculation and motion analysis
 - `spectral_matching.py`: Iteratively adjusts the motion to match the target spectrum
 - `visualization.py`: Generates plots and output files
-- `example.py`: Provides a complete usage example
+- `agmg.py`: Provides a complete usage example and main generator entry point
 
 ## Installation
 
-No special installation is required. Simply clone the repository and ensure you have the necessary dependencies installed:
+No special installation is required. Simply clone the repository and ensure you have the necessary dependencies installed using the provided requirements file:
 
 ```bash
 git clone https://github.com/btayfur/artificial-ground-motion.git
 cd artificial-ground-motion
-pip install numpy scipy matplotlib
+pip install -r requirements.txt
 ```
 
 ## Usage
 
-The basic workflow for generating an artificial ground motion is demonstrated in `example.py`:
+The basic workflow for generating an artificial ground motion is demonstrated in `agmg.py`:
 
 ```python
-from design_spectrum import TBDYSpectrum
-from initial_motion import InitialMotionGenerator
-from envelope import EnvelopeFunction
-from spectral_analysis import SpectralAnalysis
-from spectral_matching import SpectralMatcher
-from visualization import OutputGenerator
+from agmg import generate_motion_TDBY
 
-# Generate a motion matching TBDY 2018 spectrum
-generate_motion_TDBY(
-    Ss=0.3,             # Short-period spectral acceleration coefficient
-    S1=0.15,            # 1.0 second period spectral acceleration coefficient
-    soil_class='ZD',    # Local soil class
+# Generate a motion matching TBDY 2018 spectrum (with optional seed for exact reproducibility)
+best_avg_error, best_max_error = generate_motion_TDBY(
+    Ss=1.3,             # Short-period spectral acceleration coefficient
+    S1=0.4,             # 1.0 second period spectral acceleration coefficient
+    soil_class='ZB',    # Local soil class
+    max_iterations=30,  # Maximum matching iterations
+    max_non_improvement=15, # Wait limit without error improvement
     duration=40.0,      # Motion duration (seconds)
     dt=0.01,            # Time step (seconds)
-    pga=0.3,            # Target peak ground acceleration (g)
-    omega_g=15.0,       # Kanai-Tajimi natural frequency (rad/s)
-    zeta_g=0.6,         # Kanai-Tajimi damping ratio
+    pga_="tdby",        # Target PGA method or specific value
+    omega_g=15.0,       # Kanai-Tajimi ground natural frequency (rad/s)
+    zeta_g=0.6,         # Kanai-Tajimi ground damping ratio
     name='example',     # Output directory name
-    imageoutput=True    # Generate visualization images
+    imageoutput=True,   # Generate visualization images
+    seed=0              # Pass an integer seed to make calculations fully reproducible (default is None)
 )
 ```
-Actually there are tons of parameters in the code. Each one can be subject of an optimization problem, if its your aim.
 
 The generated motion and analysis results will be saved in a directory named `{name}_outputs`.
 
@@ -81,7 +79,7 @@ The toolkit provides numerous parameters for fine-tuning the generated motions:
 - **Spectral Matching**: Control iteration limits, convergence criteria, and frequency ranges
 - **Visualization**: Generate detailed reports and plots for analysis
 
-Refer to the docstrings and example.py for detailed parameter descriptions.
+Refer to the docstrings and `agmg.py` for detailed parameter descriptions.
 
 ## Output
 
@@ -98,4 +96,3 @@ The toolkit generates various outputs such as:
 This project is created for academic purposes. Contributions and pull requests are warmly welcomed.
 
 ## How to cite
-
