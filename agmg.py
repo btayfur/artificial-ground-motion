@@ -19,7 +19,7 @@ from scipy import signal
 import numpy as np
 
 
-def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvement=2, duration=40.0, dt=0.01, pga_='tdby', omega_g=15.0, zeta_g=0.6, name='default', imageoutput=False):
+def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvement=2, duration=40.0, dt=0.01, pga_='tdby', omega_g=15.0, zeta_g=0.6, name='default', imageoutput=False, seed=None):
     """Generate acceleration time series for TBDY
     Args:
         Ss (float): Ss value
@@ -32,7 +32,14 @@ def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvem
         zeta_g (float): Damping ratio (%)
         name (str): Output directory name
         imageoutput (bool): Image output generation
+        seed (int, optional): Seed value for random number generator to ensure reproducibility
     """
+    
+    # Set seed for reproducibility if provided
+    if seed is not None:
+        import random
+        random.seed(seed)
+        np.random.seed(seed)
     
     # Create output directory
     output_dir = name+'_outputs'
@@ -82,7 +89,7 @@ def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvem
         omega_f=0.1,
         zeta_f=0.6,
         target_pga=pga,
-        #seed=42  # For reproducibility (for test you can use seed, but if you are searching for a good motion, try different seeds or let it be None)
+        seed=seed  # For reproducibility (passes seed from generate_motion_TDBY)
     )
 
     # -------------------------------------------------------
@@ -261,7 +268,7 @@ def generate_motion_TDBY(Ss, S1, soil_class, max_iterations=10, max_non_improvem
 
 
 
-best_avg_error, best_max_error = generate_motion_TDBY(Ss=1.3, S1=0.4, soil_class='ZB', max_iterations=10, max_non_improvement=5, duration=40.0, dt=0.01, pga_="tdby", omega_g=15.0, zeta_g=0.6, name='example', imageoutput=True)
+best_avg_error, best_max_error = generate_motion_TDBY(Ss=1.3, S1=0.4, soil_class='ZB', max_iterations=30, max_non_improvement=15, duration=40.0, dt=0.01, pga_="tdby", omega_g=15.0, zeta_g=0.6, name='seeded', imageoutput=True, seed=0)
 print(f"Best Average Error: {best_avg_error:.4f}")
 print(f"Best Maximum Error: {best_max_error:.4f}")
 
