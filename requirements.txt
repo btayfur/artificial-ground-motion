@@ -1,0 +1,10 @@
+# Core numerical and scientific computing
+numpy>=1.22.0
+scipy>=1.8.0
+
+# Data analysis and handling (used in agmg_TLBO and tests)
+pandas>=1.4.0
+
+# Visualization and plotting
+matplotlib>=3.5.0
+seaborn>=0.12.0
